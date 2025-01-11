@@ -47,7 +47,7 @@ jobs:
           ci-ref: refs/heads/master
           ci-user: jackie-chen-opus
           ci-user-token: ${{ secrets.CI_TOKEN }}
-          ci-name: CI
+          ci-name: CI,Change image version
           ci-inputs: >-
             image=${{ secrets.USERNAME }}/flask-demo
             sha-tag=${{ github.sha }}
