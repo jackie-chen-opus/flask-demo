@@ -11,6 +11,10 @@ def handle_post():
     # 打印接收到的数据
     print("Received data:", data)
     
+    # 检查数据是否为空
+    if data is None:
+        print("No data received or data is not in JSON format")
+    
     # 返回响应
     return "Data received!", 200
 
@@ -21,4 +25,4 @@ def handle_get():
     return "This is a demo", 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8888)
+    app.run(debug=True)
