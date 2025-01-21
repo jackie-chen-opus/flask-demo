@@ -36,7 +36,7 @@ jobs:
       - name: build image
         run: |
           make image
-          docker tag flask-demo:latest ${{ secrets.USERNAME }}/flask-demo:${{ github.sha }}
+          docker tag flask-demo:latest ${{ secrets.USERNAME }}/flask-demo
           docker push ${{ secrets.USERNAME }}/flask-demo
 
       # - name: Trigger CI
