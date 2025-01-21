@@ -25,8 +25,9 @@ def handle_post():
     if challenge:
         # 返回 challenge 字段的值
         return {"challenge": challenge}, 200
-    else:
-        return "No challenge field in data", 400
+
+    # return "No challenge field in data", 400
+    return "No challenge field in data", 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888, debug=True)
