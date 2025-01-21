@@ -29,5 +29,12 @@ def handle_post():
     # return "No challenge field in data", 400
     return "No challenge field in data", 200
 
+
+# 处理GET请求
+@app.route('/', methods=['GET'])
+def handle_get():
+    return "This is a demo", 200
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888, debug=True)
