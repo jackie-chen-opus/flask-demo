@@ -29,4 +29,4 @@ def handle_post():
         return "No challenge field in data", 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8888)
+    app.run(host='0.0.0.0', port=8888, debug=True)
