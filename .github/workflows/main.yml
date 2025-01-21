@@ -37,17 +37,17 @@ jobs:
         run: |
           make image
           docker tag flask-demo:latest ${{ secrets.USERNAME }}/flask-demo:${{ github.sha }}
-          docker push ${{ secrets.USERNAME }}/flask-demo:${{ github.sha }}
+          docker push ${{ secrets.USERNAME }}/flask-demo
 
-      - name: Trigger CI
-        uses: InformaticsMatters/trigger-ci-action@1.0.1
-        with:
-          ci-owner: jackie-chen-opus
-          ci-repository: flask-demo-kustomize
-          ci-ref: refs/heads/master
-          ci-user: jackie-chen-opus
-          ci-user-token: ${{ secrets.CI_TOKEN }}
-          ci-name: Change image version
-          ci-inputs: >-
-            image=${{ secrets.USERNAME }}/flask-demo
-            sha-tag=${{ github.sha }}
+      # - name: Trigger CI
+      #   uses: InformaticsMatters/trigger-ci-action@1.0.1
+      #   with:
+      #     ci-owner: jackie-chen-opus
+      #     ci-repository: flask-demo-kustomize
+      #     ci-ref: refs/heads/master
+      #     ci-user: jackie-chen-opus
+      #     ci-user-token: ${{ secrets.CI_TOKEN }}
+      #     ci-name: Change image version
+      #     ci-inputs: >-
+      #       image=${{ secrets.USERNAME }}/flask-demo
+      #       sha-tag=${{ github.sha }}
