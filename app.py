@@ -18,14 +18,15 @@ def handle_post():
     # 检查数据是否为空
     if data is None:
         app.logger.debug("No data received or data is not in JSON format")
+        return "No data received or data is not in JSON format", 400
     
-    # 返回响应
-    return "Data received!", 200
-
-# 处理GET请求
-@app.route('/', methods=['GET'])
-def handle_get():
-    return "This is a demo", 200
+    # 检查是否包含 challenge 字段
+    challenge = data.get('challenge')
+    if challenge:
+        # 返回 challenge 字段的值
+        return {"challenge": challenge}, 200
+    else:
+        return "No challenge field in data", 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8888, debug=True)
+    app.run(host='0.0.0.0', port=8888)
