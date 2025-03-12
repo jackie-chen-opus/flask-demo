@@ -21,4 +21,5 @@ jobs:
       - name: Get recent commits
         id: recent_commits
         run: |
-          git log -3 --pretty=format:"%H"
+          REVERT_COMMIT=$(git log -2 --pretty=format:"%H" | tail -n 1)
+          echo $REVERT_COMMIT
