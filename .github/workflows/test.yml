@@ -1,9 +1,6 @@
 name: Apply22 and Rollback Prisma Migrations
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       rollback:
