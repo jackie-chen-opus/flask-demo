@@ -1,4 +1,4 @@
-name: Apply444 and Rollback Prisma Migrations
+name: Apply Prisma Migrations
 
 on:
   workflow_dispatch:
@@ -22,4 +22,4 @@ jobs:
         id: recent_commits
         run: |
           recent=$(git log -n 3 --oneline)
-          echo "recent_commits=$recent" >> "$GITHUB_ENV"
+          echo "recent_commits=$recent"
