@@ -21,5 +21,4 @@ jobs:
       - name: Get recent commits
         id: recent_commits
         run: |
-          recent=$(git log -n 3 --oneline)
-          echo "recent_commits=$recent"
+          git log -n 3 --oneline
