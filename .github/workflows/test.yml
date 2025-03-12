@@ -1,19 +1,27 @@
-name: Apply and Rollback Prisma Migrations
+name: Apply22 and Rollback Prisma Migrations
+
 on:
-  pull_request:
-    types: [opened, edited, synchronize, reopened]
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      rollback:
+        description: "Rollback the last migration"
+        required: false
+        default: "false"
+        type: boolean
 
 jobs:
-  check-typos:
+  apply-prisma:
     runs-on: cicd
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Echo PR Title/Description for typo checking
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get recent commits
+        id: recent_commits
         run: |
-          echo "PR Title: ${{ github.event.pull_request.title }}" > pr.md
-          echo "PR Description: ${{ github.event.pull_request.body }}" >> pr.md
-      - name: Check spelling of all files
-        uses: crate-ci/typos@v1.28.4
-        with:
-          files: .
+          recent=$(git log -n 3 --oneline)
+          echo "recent_commits=$recent" >> "$GITHUB_ENV"
