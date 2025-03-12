@@ -1,0 +1,19 @@
+name: Apply and Rollback Prisma Migrations
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  check-typos:
+    runs-on: cicd
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Echo PR Title/Description for typo checking
+        run: |
+          echo "PR Title: ${{ github.event.pull_request.title }}" > pr.md
+          echo "PR Description: ${{ github.event.pull_request.body }}" >> pr.md
+      - name: Check spelling of all files
+        uses: crate-ci/typos@v1.28.4
+        with:
+          files: .
