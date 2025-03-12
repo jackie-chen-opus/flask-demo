@@ -3,11 +3,12 @@ name: Apply444 and Rollback Prisma Migrations
 on:
   workflow_dispatch:
     inputs:
-      rollback:
-        description: "Rollback the last migration"
-        required: false
-        default: "false"
-        type: boolean
+      service:
+        type: choice
+        description: "choose the service"
+        required: true
+        options:
+          - clip-engine-api
 
 jobs:
   apply-prisma:
