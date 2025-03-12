@@ -1,4 +1,4 @@
-name: Apply333 and Rollback Prisma Migrations
+name: Apply444 and Rollback Prisma Migrations
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   apply-prisma:
-    runs-on: cicd
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
