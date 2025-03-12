@@ -21,4 +21,4 @@ jobs:
       - name: Get recent commits
         id: recent_commits
         run: |
-          git log -n 3 --oneline
+          git log -3 --pretty=format:"%H"
