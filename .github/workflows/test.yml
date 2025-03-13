@@ -12,17 +12,24 @@ on:
 
 jobs:
   apply-prisma:
-    runs-on: ubuntu-latest
+    if: github.event.inputs.service == 'clip-engine-api'
 
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Get recent commits
+      - name: Get revert commits
         id: recent_commits
         run: |
           REVERT_COMMIT=$(git log -2 --pretty=format:"%H" | tail -n 1)
-          pwd
           echo "REVERT_COMMIT $REVERT_COMMIT"
+
+      - name: Apply Prisma Migrations
+        id: recent_commits
+        run: |
+          cd /app/apps/clip-api
+          pwd
+          # dotenv -e ./config/.env.production -- npx prisma generate && dotenv -e ./config/.env.production -- npx prisma db push
