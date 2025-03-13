@@ -1,0 +1,39 @@
+---
+name: Revert Prisma Migrations
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        type: choice
+        description: "Choose the service"
+        required: true
+        options:
+          - clip-engine-api
+      revert_commit:
+        type: string
+        description: "The revert commit to revert to"
+        required: true
+
+jobs:
+  revert-prisma:
+    if: github.event.inputs.service == 'clip-engine-api'
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout specific commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.revert_commit }}
+          fetch-depth: 2
+
+      - name: Get current commit id
+        run: |
+          CUR_COMMIT=$(git log -1 --pretty=format:"%H" | tail -n 1)
+          echo "CUR_COMMIT $CUR_COMMIT"
+
+      - name: Revert Prisma Migrations
+        run: |
+          cd /app/apps/clip-api
+          pwd
+          # dotenv -e ./config/.env.production

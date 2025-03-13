@@ -1,11 +1,19 @@
+---
 name: Apply Prisma Migrations
 
 on:
   workflow_dispatch:
+    environment:
+      type: choice
+      description: 'Choose the environment'
+      required: true
+      options:
+        - staging
+        - production
     inputs:
       service:
         type: choice
-        description: "choose the service"
+        description: 'choose the service'
         required: true
         options:
           - clip-engine-api
@@ -21,7 +29,7 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get revert commits
+      - name: Get revert commit id
         run: |
           REVERT_COMMIT=$(git log -2 --pretty=format:"%H" | tail -n 1)
           echo "REVERT_COMMIT $REVERT_COMMIT"
@@ -30,4 +38,4 @@ jobs:
         run: |
           cd /app/apps/clip-api
           pwd
-          # dotenv -e ./config/.env.production -- npx prisma generate && dotenv -e ./config/.env.production -- npx prisma db push
+          # dotenv -e ./config/.env.production
